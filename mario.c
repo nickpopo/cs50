@@ -8,24 +8,27 @@ int main(void)
     do
     {
         //ask user height of half-pyramide
-        height = get_int("How height pyramide do you want?\n");
+        printf("Height: ");
+        height = get_int();
     }
-    while(height < 0 && height > 23);
+    while( height < 0 || height > 23);
     
     for (int i = 0; i < height; i++)
-    {
-        int count = 1;
-        int hashes = 2;
+    {   
+        int row = i+1;
+        int spaces = height;
+        int hashes = 0;
         
         //print spaces
-        while(height-count>i)
+        while(spaces > row)
         {
             printf(" ");
-            count++;
+            spaces--;
         }
-        
+
         //print hashes
-        while(hashes<height+i){
+        while(hashes < row + 1)
+        {
             printf("#");
             hashes++;
         }
