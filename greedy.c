@@ -1,5 +1,6 @@
 #include <cs50.h>
 #include <stdio.h>
+#include <math.h>
 
 int main(void)
 {
@@ -14,9 +15,9 @@ int main(void)
     while (changes < 0);
     
     //convert an amount into cents
-    int centsUser = changes * 100;
+    int centsUser = round(changes * 100);
     //print convertion result
-    printf("%0.2f$ equal to %ic\n", changes, centsUser);
+    printf("%0.55f$ equal to %ic\n", changes, centsUser);
 
     //create integer valuable coints
     int coins;
