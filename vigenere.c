@@ -59,8 +59,17 @@ int main (int argc, string argv[])
     for(int i = 0; i < l ; i++)
     {
         if( plaintext[i] != ' ')
-        {
-            ciphertext[i] = plaintext[i]+keyword[i % n];
+        {   
+            if(isupper(plaintext[i]))
+            {
+                ciphertext[i] = (plaintext[i]+keyword[i % n]) % 26;
+                ciphertext[i] =  ciphertext[i] + 'A';
+            }
+            else
+            {
+                ciphertext[i] = (plaintext[i]+keyword[i % n]) % 26;
+                ciphertext[i] =  ciphertext[i] + 'a';
+            }
         }
         else
         {
