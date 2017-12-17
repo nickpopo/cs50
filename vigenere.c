@@ -41,8 +41,8 @@ int main (int argc, string argv[])
             num[i] = keyword[i];
         }
         
-        // printf("%c: ", key[i]);
-        // printf("%i\n", num[i]);
+        printf("%c: ", key[i]);
+        printf("%i\n", num[i]);
         
     }
     
@@ -54,20 +54,22 @@ int main (int argc, string argv[])
     
     int l = strlen(plaintext);
     
-    char ciphertext[l];
+    char ciphertext[24];
     
     for(int i = 0; i < l ; i++)
     {
-        if( plaintext[i] != ' ')
+        if( plaintext[i] != ' ' && isalpha(plaintext[i]))
         {   
+            argv[1][i] = toupper(argv[1][i]);
+            
             if(isupper(plaintext[i]))
             {
-                ciphertext[i] = (plaintext[i]+keyword[i % n]) % 26;
+                ciphertext[i] = (plaintext[i]+argv[1][i % n]) % 26;
                 ciphertext[i] =  ciphertext[i] + 'A';
             }
             else
             {
-                ciphertext[i] = (plaintext[i]+keyword[i % n]) % 26;
+                ciphertext[i] = (plaintext[i]-32+argv[1][i % n]) % 26;
                 ciphertext[i] =  ciphertext[i] + 'a';
             }
         }
@@ -76,6 +78,8 @@ int main (int argc, string argv[])
             ciphertext[i] = plaintext[i];
         }
     }
+    ciphertext[l] = '\0';
+    
     
     
     printf("ciphertext: %s\n", ciphertext);
