@@ -46,15 +46,11 @@ int main (int argc, string argv[])
         
     }
     
-    
-    keyword[n] = '\0';
-
-    
     string plaintext = get_string("plaintext: ");
     
     int l = strlen(plaintext);
     
-    char ciphertext[24];
+    char ciphertext[l];
     
     for(int i = 0; i < l ; i++)
     {
