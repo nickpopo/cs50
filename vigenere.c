@@ -41,8 +41,8 @@ int main (int argc, string argv[])
             num[i] = keyword[i];
         }
         
-        printf("%c: ", key[i]);
-        printf("%i\n", num[i]);
+        // printf("%c: ", key[i]);
+        // printf("%i\n", num[i]);
         
     }
     
