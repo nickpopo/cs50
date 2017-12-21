@@ -36,7 +36,7 @@ bool search(int value, int values[], int n)
     int middleList;
 
     
-    while(lengthList > 0)
+    while(lengthList >= 0)
     {   
         // calculate middle of list
         middleList = ( start + end ) / 2;
