@@ -15,7 +15,7 @@
 bool search(int value, int values[], int n)
 {
     //ensure proper usage
-    if(n<0)
+    if(n < 0)
     {
         return false;
     }
@@ -69,7 +69,7 @@ bool search(int value, int values[], int n)
 void sort(int values[], int n)
 {
     //ensure proper usage
-    if(n<0)
+    if(n < 0)
     {
         return;
     }
