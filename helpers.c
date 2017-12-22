@@ -102,6 +102,10 @@ void sort(int values[], int n)
             {   
                 // swap adjacent element
                 // swap(&values[i], &values[i+1]);
+                
+                int temp = values[i];
+                values[i] = values[i+1];
+                values[i+1] = temp;
             
                 swapCounter++;
                 
