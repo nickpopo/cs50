@@ -74,8 +74,7 @@ void sort(int values[], int n)
         return;
     }
     
-    int swapCounter = -1;
-    
+    // Print unsorted list
     printf("\n");
     
     for(int i=0; i<n; i++)
@@ -84,6 +83,10 @@ void sort(int values[], int n)
     }
     printf("\n\n");
     
+    
+    // Bubble sort
+    int swapCounter = -1;
+
     int ordered = n;
     
     while(swapCounter != 0)
@@ -98,24 +101,45 @@ void sort(int values[], int n)
             if(values[i] > values[i+1])
             {   
                 // swap adjacent element
-                int temp = values[i];
-                values[i] = values[i+1];
-                values[i+1] = temp;
-                
-                // eprintf("swap: %i : %i\n", values[i], values[i+1]);
-
-                
+                swap(&values[i], &values[i+1]);
+            
                 swapCounter++;
                 
             }
-            
         }
-        
+
         ordered--;
-        
-        
     }
     
+    // Selection Sort
+    // int min;
+    // int counter;
+    
+    // for (int i = 0; i < n; i++)
+    // {
+    //     min = i;
+        
+    //     counter = 1;
+        
+    //     while(counter < n - i)
+    //     {
+    //         if(values[min] > values[i+counter])
+    //         {
+    //             min = i+counter;
+    //         }
+            
+    //         counter++;
+    //     }
+        
+    //     // swap
+    //     swap(&values[min], &values[i]);
+    //     // int temp = values[min];
+    //     // values[min] = values[i];
+    //     // values[i] = temp;
+        
+    // }
+    
+    // Print sorted list
     for(int i=0; i<n; i++)
     {
         printf("%i ", values[i]);
@@ -123,4 +147,12 @@ void sort(int values[], int n)
     printf("\n");
     
     return;
+}
+
+// Define swap method 
+void swap(int *x, int *y)
+{
+    int temp = *x;
+    *x = *y;
+    *y = temp;
 }
