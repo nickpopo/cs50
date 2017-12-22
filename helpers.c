@@ -148,11 +148,3 @@ void sort(int values[], int n)
     
     return;
 }
-
-// Define swap method 
-void swap(int *x, int *y)
-{
-    int temp = *x;
-    *x = *y;
-    *y = temp;
-}
