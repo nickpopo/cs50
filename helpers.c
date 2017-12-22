@@ -101,7 +101,7 @@ void sort(int values[], int n)
             if(values[i] > values[i+1])
             {   
                 // swap adjacent element
-                swap(&values[i], &values[i+1]);
+                // swap(&values[i], &values[i+1]);
             
                 swapCounter++;
                 

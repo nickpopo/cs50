@@ -15,8 +15,3 @@ bool search(int value, int values[], int n);
  * Sorts array of n values.
  */
 void sort(int values[], int n);
-
-/**
- * Swap values.
- */
-void swap(int x[], int y[]);
