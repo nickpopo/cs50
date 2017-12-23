@@ -85,35 +85,35 @@ void sort(int values[], int n)
     
     
     // Bubble sort
-    int swapCounter = -1;
+    // int swapCounter = -1;
 
-    int ordered = n;
+    // int ordered = n;
     
-    while(swapCounter != 0)
-    {
-        swapCounter = 0;
+    // while(swapCounter != 0)
+    // {
+    //     swapCounter = 0;
         
-        for(int i = 0; i < ordered-1; i++)
-        {   
-            // eprintf("%i;%i\n", values[i], values[i+1]);
+    //     for(int i = 0; i < ordered-1; i++)
+    //     {   
+    //         // eprintf("%i;%i\n", values[i], values[i+1]);
             
-            // check if not in order
-            if(values[i] > values[i+1])
-            {   
-                // swap adjacent element
-                // swap(&values[i], &values[i+1]);
+    //         // check if not in order
+    //         if(values[i] > values[i+1])
+    //         {   
+    //             // swap adjacent element
+    //             // swap(&values[i], &values[i+1]);
                 
-                int temp = values[i];
-                values[i] = values[i+1];
-                values[i+1] = temp;
+    //             int temp = values[i];
+    //             values[i] = values[i+1];
+    //             values[i+1] = temp;
             
-                swapCounter++;
+    //             swapCounter++;
                 
-            }
-        }
+    //         }
+    //     }
 
-        ordered--;
-    }
+    //     ordered--;
+    // }
     
     // Selection Sort
     // int min;
@@ -143,6 +143,9 @@ void sort(int values[], int n)
         
     // }
     
+    // Merge Sort
+    mergeSort(values, n);
+    
     // Print sorted list
     for(int i=0; i<n; i++)
     {
@@ -151,4 +154,113 @@ void sort(int values[], int n)
     printf("\n");
     
     return;
+}
+
+// Merge sort
+void mergeSort(int values[], int n)
+{
+    if(n < 2)
+    {
+        return;
+    }
+    
+    //
+    // left
+    //
+    printf("left\n");
+    
+    int leftLength = n/2;
+    
+    int leftList[leftLength];
+    
+    // print
+    printf("%i\n", leftLength);
+    
+    for(int i=0; i < leftLength; i++)
+    {
+        leftList[i] = values[i];
+    }
+    
+    // print
+    for(int i=0; i<leftLength; i++)
+    {
+        printf("%i ", *(leftList+i));
+    }
+    printf("\n");
+    
+    mergeSort(leftList, leftLength);
+    
+    // 
+    // right
+    //
+    printf("right\n");
+    
+    int rightLength = n-n/2;
+    
+    int rightList[rightLength];
+    
+    printf("%i\n", rightLength);
+    
+    for(int i=0; i< rightLength; i++)
+    {
+        rightList[i] = values[leftLength+i];
+    }
+    // print
+    for(int i=0; i < rightLength; i++)
+    {
+        printf("%i ", *(rightList+i));
+    }
+    printf("\n");
+    
+    mergeSort(rightList, rightLength);
+    
+    //
+    // merge
+    //
+    
+    // print leftList
+    for(int i=0; i < leftLength; i++)
+    {
+        printf("%i ", *(leftList+i));
+    }
+    printf("\n");
+     // print rightList
+    for(int i=0; i < rightLength; i++)
+    {
+        printf("%i ", *(rightList+i));
+    }
+    printf("\n");
+    
+    // leftLength = n/2;
+    // rightLength = n - n/2;
+    
+    int leftCounter = 0;
+    int rightCounter = 0;
+    
+    for(int i=0; i < n; i++)
+    {   
+        printf("left: %i\n", leftList[i]);
+        printf("right: %i\n", rightList[i]);
+        
+        if (leftCounter >= leftLength)
+        {
+            values[i] = rightList[rightCounter];
+            rightCounter++;
+        }
+        else if (rightCounter >= rightLength)
+        {
+            values[i] = leftList[leftCounter];
+            leftCounter++;
+        }
+        else if (leftList[leftCounter] < rightList[rightCounter])
+        {
+            values[i] = leftList[leftCounter];
+            leftCounter++;
+        }
+        else
+        {
+            values[i] = rightList[rightCounter];
+            rightCounter++;
+        }
+    }
 }
