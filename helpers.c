@@ -144,7 +144,7 @@ void sort(int values[], int n)
     // }
     
     // Merge Sort
-    mergeSort(values, n);
+    //mergeSort(values, n);
     
     // Print sorted list
     for(int i=0; i<n; i++)
