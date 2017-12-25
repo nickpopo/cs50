@@ -182,11 +182,10 @@ void init(void)
     // swap if even
     if(d % 2 == 0)
     {
-        // even
         swap(d-1,d-2,d-1,d-3);
     }
     
-    // sorted board for won()
+    // sorted board for checking won()
     counter = 1;
     
     for(int i = 0; i < d; i++)
@@ -239,7 +238,7 @@ bool move(int tile)
 {
     // TODO
     
-    // Search Location of the Tile
+    // search location of the Tile and Swap if legal
     
     for (int i = 0; i < d; i++)
     {
