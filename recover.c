@@ -28,10 +28,8 @@ int main(int argc, char *argv[])
     
     FILE *img = NULL;
     
-    while (feof(inFile) == 0)
+    while (fread(&buffer, sizeof(uint8_t), 512, inFile))
     {   
-        
-        fread(&buffer, sizeof(uint8_t), 512, inFile);
         
         // for( int i = 0; i < 4; i++)
         //     printf("0x%02x\n", buffer[i]);
