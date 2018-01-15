@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     
     char jpegName[8];
     
-    int counter = 1;
+    int counter = 0;
     
     uint8_t *buffer = malloc(sizeof(uint8_t)*512);
     
