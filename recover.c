@@ -60,10 +60,10 @@ int main(int argc, char *argv[])
             fwrite(buffer, sizeof(uint8_t), 512, img);
     }
     
+    free(buffer);
+    
     fclose(inFile);
     fclose(img);
-    
-    free(buffer);
     
     return 0;
 }
