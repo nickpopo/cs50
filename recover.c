@@ -24,14 +24,14 @@ int main(int argc, char *argv[])
     
     int counter = 0;
     
-    uint8_t *buffer = malloc(sizeof(uint8_t)*512);
+    uint8_t buffer[512];
     
     FILE *img = NULL;
     
     while (feof(inFile) == 0)
     {   
         
-        fread(buffer, sizeof(uint8_t), 512, inFile);
+        fread(&buffer, sizeof(uint8_t), 512, inFile);
         
         // for( int i = 0; i < 4; i++)
         //     printf("0x%02x\n", buffer[i]);
@@ -57,10 +57,8 @@ int main(int argc, char *argv[])
         }
         
         if (img !=NULL)
-            fwrite(buffer, sizeof(uint8_t), 512, img);
+            fwrite(&buffer, sizeof(uint8_t), 512, img);
     }
-    
-    free(buffer);
     
     fclose(inFile);
     fclose(img);
