@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     
     FILE *img = NULL;
     
-    do{   
+    while (feof(inFile) == 0){   
         fread(buffer, sizeof(uint8_t), 512, inFile);
         
         // for( int i = 0; i < 4; i++)
@@ -56,9 +56,7 @@ int main(int argc, char *argv[])
         
         if (img !=NULL)
             fwrite(buffer, sizeof(uint8_t), 512, img);
-        
-        
-    }while (feof(inFile) == 0);
+    }
     
     fwrite(buffer, sizeof(uint8_t), 512, img);
     
