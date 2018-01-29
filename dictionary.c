@@ -9,7 +9,7 @@
 #include "my.h"
 
 // declare constant of top linked lists
-node *hashtable[6132];
+node *hashtable[1800];
 
 // Returns true if word is in dictionary else false
 bool check(const char *word)
@@ -23,7 +23,7 @@ bool check(const char *word)
         {
             return true;
         }
-  
+
         cursor = cursor->next;
     }
 
@@ -86,8 +86,8 @@ unsigned int size(void)
     // TODO
     unsigned int counter = 0;
     node *cursor = NULL;
-    
-    for ( int i = 0; i < 6132; i++)
+
+    for (int i = 0; i < 1800; i++)
     {
         if (hashtable[i] != NULL)
         {
@@ -100,7 +100,6 @@ unsigned int size(void)
             } 
         }
     }
-
     return counter;
 }
 
@@ -110,7 +109,7 @@ bool unload(void)
     // TODO
     node *cursor = NULL;
 
-    for (int i = 0; i < 6132; i++)
+    for (int i = 0; i < 1800; i++)
     {
         if (hashtable[i] != NULL)
         {
@@ -130,11 +129,10 @@ bool unload(void)
 
 int hash(const char *x) 
 {
-   
   int xlength = strlen(x);
-   
   int i, sum;
   for (sum=0, i=0; i < xlength; i++)
-     sum += x[i];
-  return sum % 6132;
+    sum += x[i];
+
+  return sum % 1800;
 }
