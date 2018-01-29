@@ -15,13 +15,15 @@ node *hashtable[1800];
 bool check(const char *word)
 {
     // make word lowercase
-    char wordcheck[LENGTH+1];
+    char wordcheck[LENGTH + 1];
     int letter = 0;
+
     while (word[letter] != '\0')
     {
         wordcheck[letter] = tolower(word[letter]);
         letter++;
     }
+
     wordcheck[letter] = '\0';
 
     node *cursor = hashtable[hash(wordcheck)];
@@ -35,6 +37,7 @@ bool check(const char *word)
 
         cursor = cursor->next;
     }
+
     return false;
 }
 
@@ -45,14 +48,14 @@ bool load(const char *dictionary)
     FILE *dic = fopen(dictionary, "r");
 
     // Check it's opened
-    if(dic == NULL)
+    if (dic == NULL)
     {
         printf("Can't open dictionary file\n");
         return false;
     }
 
     // Define variable
-    char word[LENGTH+1];
+    char word[LENGTH + 1];
 
     while (fscanf(dic, "%s", word) != EOF)
     {
@@ -73,7 +76,7 @@ bool load(const char *dictionary)
         // Get hash code for word
         int hash_index = hash(word);
 
-        if(hashtable[hash_index] != NULL)
+        if (hashtable[hash_index] != NULL)
         {
             new_node->next = hashtable[hash_index];
             hashtable[hash_index] = new_node;
@@ -105,9 +108,10 @@ unsigned int size(void)
             {
                 cursor = cursor->next;
                 counter++;
-            } 
+            }
         }
     }
+
     return counter;
 }
 
@@ -122,7 +126,7 @@ bool unload(void)
         if (hashtable[i] != NULL)
         {
             cursor = hashtable[i];
-            
+
             while (cursor != NULL)
             {
                 cursor = cursor->next;
@@ -135,12 +139,14 @@ bool unload(void)
     return true;
 }
 // Hash fuction for generating code
-int hash(const char *x) 
+int hash(const char *x)
 {
-  int xlength = strlen(x);
-  int i, sum;
-  for (sum=0, i=0; i < xlength; i++)
-    sum += x[i];
+    int xlength = strlen(x);
+    int sum = 0;
+    for (int i = 0; i < xlength; i++)
+    {
+        sum += x[i];
+    }
 
-  return sum % 1800;
+    return sum % 1800;
 }
