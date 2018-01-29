@@ -10,4 +10,3 @@ node;
 
 // Protopypes
 int hash(const char *word);
-

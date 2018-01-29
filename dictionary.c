@@ -9,8 +9,7 @@
 #include "my.h"
 
 // declare constant of top linked lists
-// node *head = NULL;
-node *hashtable[6000];
+node *hashtable[6132];
 
 // Returns true if word is in dictionary else false
 bool check(const char *word)
@@ -33,11 +32,10 @@ bool check(const char *word)
 
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
-{   
-    
+{
     // Open the file dictionary for reading
     FILE *dic = fopen(dictionary, "r");
-    
+
     // Check it's opened
     if(dic == NULL)
     {
@@ -51,7 +49,6 @@ bool load(const char *dictionary)
     while (fscanf(dic, "%s", word) != EOF)
     {
         node *new_node = malloc(sizeof(node));
-        new_node->next = NULL;
 
         if (new_node == NULL)
         {
@@ -60,7 +57,12 @@ bool load(const char *dictionary)
             return 2;
         }
 
+        new_node->next = NULL;
+
+        // Coping word into new_node
         strcpy(new_node->word, word);
+
+        // Get hash code for word
         int hash_index = hash(word);
 
         if(hashtable[hash_index] != NULL)
@@ -73,8 +75,8 @@ bool load(const char *dictionary)
             hashtable[hash_index] = new_node;
         }
     }
-    fclose(dic);
 
+    fclose(dic);
     return true;
 }
 
@@ -85,7 +87,7 @@ unsigned int size(void)
     unsigned int counter = 0;
     node *cursor = NULL;
     
-    for ( int i = 0; i < 6000; i++)
+    for ( int i = 0; i < 6132; i++)
     {
         if (hashtable[i] != NULL)
         {
@@ -108,7 +110,7 @@ bool unload(void)
     // TODO
     node *cursor = NULL;
 
-    for (int i = 0; i < 6000; i++)
+    for (int i = 0; i < 6132; i++)
     {
         if (hashtable[i] != NULL)
         {
@@ -134,24 +136,5 @@ int hash(const char *x)
   int i, sum;
   for (sum=0, i=0; i < xlength; i++)
      sum += x[i];
-  return sum % 6000;
+  return sum % 6132;
 }
- 
-// int hash(const char *word)
-// {   
-//     int a = 0;
-//     int b = 0;
-    
-//     if(strlen(word)>2)
-//     {
-//         a = toupper(word[0]) - 65;
-        
-//         b = (word[1] != '\'') ? toupper(word[1]) - 64 : 27;
-//     }
-//     else
-//     {
-//         a = toupper(word[0]) - 65;
-//     }
-    
-//     return a+b;
-// }
