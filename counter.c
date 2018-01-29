@@ -2,6 +2,8 @@
 
 int main(int argc, char *argv[])
 {
+    int c = '\'';
+    printf("%i", c);
     
     if (argc != 2)
     {

@@ -5,43 +5,30 @@
 #include <string.h>
 #include <strings.h>
 
-#include "my.h"
 #include "dictionary.h"
+#include "my.h"
 
-
-// declare root array of pointers
-node *root = NULL;
+// declare constant of top linked lists
+// node *head = NULL;
+node *hashtable[6000];
 
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
     // TODO
-    node *cursor = root;
+    node *cursor = hashtable[hash(word)];
 
-    for (int i=0; word[i] != '\0'; i++)
+    while (cursor != NULL)
     {
-        if (word[i] != '\'')
+        if (strcasecmp(word, cursor->word) == 0)
         {
-            if (cursor->children[toupper(word[i]) - 65] == NULL)
-            {
-                return false;
-            }
-            
-            cursor = cursor->children[toupper(word[i]) - 65];
+            return true;
         }
-        else
-        {
-            if (cursor->children[26] == NULL)
-            {
-                return false;
-            }
-            
-            cursor = cursor->children[26];  
-        }
-        
+  
+        cursor = cursor->next;
     }
 
-    return cursor->is_word;
+    return false;
 }
 
 // Loads dictionary into memory, returning true if successful else false
@@ -58,68 +45,34 @@ bool load(const char *dictionary)
         return false;
     }
 
-    // Define variable and poiters
+    // Define variable
     char word[LENGTH+1];
-    root = malloc(sizeof(node));
-    memset(root, 0, sizeof(node));
-    node *cursor = root;
 
     while (fscanf(dic, "%s", word) != EOF)
     {
-        for (int i = 0; word[i] != '\0'; i++)
-        {
-            
-            if (word[i] != '\'')
-            {
-                if (cursor->children[toupper(word[i]) - 65] != NULL)
-                {
-                    cursor = cursor->children[toupper(word[i]) - 65];
-                }
-                else
-                {
-                    node *new_node = malloc(sizeof(node));
-                    memset(new_node, 0, sizeof(node));
-    
-                    if (new_node == NULL)
-                    {
-                        unload();
-                        printf("Can't allocate memory, over memory\n");
-                        return 2;
-                    }
-    
-                    cursor->children[(toupper(word[i]) - 65)] = new_node;
-                    cursor = new_node;
-                    
-                } 
-            }
-            else
-            {
-                if (cursor->children[26] != NULL)
-                {
-                    cursor = cursor->children[26];
-                }
-                else
-                {
-                    node *new_node = malloc(sizeof(node));
-                    memset(new_node, 0, sizeof(node));
-    
-                    if (new_node == NULL)
-                    {
-                        unload();
-                        printf("Can't allocate memory, over memory\n");
-                        return 2;
-                    }
+        node *new_node = malloc(sizeof(node));
+        new_node->next = NULL;
 
-                    cursor->children[26] = new_node;
-                    cursor = new_node;
-                } 
-            }
+        if (new_node == NULL)
+        {
+            unload();
+            printf("Can't allocate memory, over memory\n");
+            return 2;
         }
 
-        cursor->is_word = true;
-        cursor = root;
-    }
+        strcpy(new_node->word, word);
+        int hash_index = hash(word);
 
+        if(hashtable[hash_index] != NULL)
+        {
+            new_node->next = hashtable[hash_index];
+            hashtable[hash_index] = new_node;
+        }
+        else
+        {
+            hashtable[hash_index] = new_node;
+        }
+    }
     fclose(dic);
 
     return true;
@@ -129,56 +82,76 @@ bool load(const char *dictionary)
 unsigned int size(void)
 {
     // TODO
-    node *cursor = root;
+    unsigned int counter = 0;
+    node *cursor = NULL;
     
-    return size_dic(cursor);
-    
+    for ( int i = 0; i < 6000; i++)
+    {
+        if (hashtable[i] != NULL)
+        {
+            cursor = hashtable[i];
+
+            while (cursor != NULL)
+            {
+                cursor = cursor->next;
+                counter++;
+            } 
+        }
+    }
+
+    return counter;
 }
 
 // Unloads dictionary from memory, returning true if successful else false
 bool unload(void)
 {
     // TODO
-    node *cursor = root;
-    
-    return free_dic(cursor);
-    
-}
+    node *cursor = NULL;
 
-// size of dictionary in trie
-int size_dic(node *cursor)
-{
-    unsigned int counter = 0;
-    
-    for (int i = 0; i < 27; i++)
+    for (int i = 0; i < 6000; i++)
     {
-        if (cursor->children[i]!=NULL)
+        if (hashtable[i] != NULL)
         {
-            counter += size_dic(cursor->children[i]);
-        }
-    }
-    
-    // chech is_word
-    if(cursor->is_word)
-    {
-        return counter+1;
-    }
-    
-    return counter;
-}
-
-// free all memory for dictionary
-int free_dic(node *cursor)
-{
-    for (int i = 0; i < 27; i++)
-    {
-        if (cursor->children[i]!=NULL)
-        {
-            free_dic(cursor->children[i]);
+            cursor = hashtable[i];
+            
+            while (cursor != NULL)
+            {
+                cursor = cursor->next;
+                free(hashtable[i]);
+                hashtable[i] = cursor;
+            }
         }
     }
 
-    free(cursor);
-
-    return 1;
+    return true;
 }
+
+int hash(const char *x) 
+{
+   
+  int xlength = strlen(x);
+   
+  int i, sum;
+  for (sum=0, i=0; i < xlength; i++)
+     sum += x[i];
+  return sum % 6000;
+}
+ 
+// int hash(const char *word)
+// {   
+//     int a = 0;
+//     int b = 0;
+    
+//     if(strlen(word)>2)
+//     {
+//         a = toupper(word[0]) - 65;
+        
+//         b = (word[1] != '\'') ? toupper(word[1]) - 64 : 27;
+//     }
+//     else
+//     {
+//         a = toupper(word[0]) - 65;
+//     }
+    
+//     return a+b;
+// }

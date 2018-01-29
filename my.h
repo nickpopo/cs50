@@ -1,15 +1,13 @@
 #include <ctype.h>
-#include <stdio.h>
-#include <stdbool.h>
 
 // create new data structure
 typedef struct node
 {
-    bool is_word;
-    struct node *children[27];
+    char word[LENGTH + 1];
+    struct node *next;
 }
 node;
 
-// prototypes
-int size_dic(node *cursor);
-int free_dic(node *cursor);
+// Protopypes
+int hash(const char *word);
+
