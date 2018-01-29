@@ -26,7 +26,6 @@ bool check(const char *word)
 
         cursor = cursor->next;
     }
-
     return false;
 }
 
@@ -126,7 +125,7 @@ bool unload(void)
 
     return true;
 }
-
+// Hash fuction for generating code
 int hash(const char *x) 
 {
   int xlength = strlen(x);
