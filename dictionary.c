@@ -14,12 +14,21 @@ node *hashtable[1800];
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
-    // TODO
-    node *cursor = hashtable[hash(word)];
+    // make word lowercase
+    char wordcheck[LENGTH+1];
+    int letter = 0;
+    while (word[letter] != '\0')
+    {
+        wordcheck[letter] = tolower(word[letter]);
+        letter++;
+    }
+    wordcheck[letter] = '\0';
+
+    node *cursor = hashtable[hash(wordcheck)];
 
     while (cursor != NULL)
     {
-        if (strcasecmp(word, cursor->word) == 0)
+        if (strcasecmp(wordcheck, cursor->word) == 0)
         {
             return true;
         }
