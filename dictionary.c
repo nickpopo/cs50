@@ -12,6 +12,7 @@
 
 // declare constant of top linked lists
 node *hashtable[M];
+int size_dic=0;
 
 // Returns true if word is in dictionary else false
 bool check(const char *word)
@@ -87,6 +88,7 @@ bool load(const char *dictionary)
         {
             hashtable[hash_index] = new_node;
         }
+        size_dic ++;
     }
 
     fclose(dic);
@@ -97,24 +99,24 @@ bool load(const char *dictionary)
 unsigned int size(void)
 {
     // TODO
-    unsigned int counter = 0;
-    node *cursor = NULL;
+    // unsigned int counter = 0;
+    // node *cursor = NULL;
 
-    for (int i = 0; i < M; i++)
-    {
-        if (hashtable[i] != NULL)
-        {
-            cursor = hashtable[i];
+    // for (int i = 0; i < M; i++)
+    // {
+    //     if (hashtable[i] != NULL)
+    //     {
+    //         cursor = hashtable[i];
 
-            while (cursor != NULL)
-            {
-                cursor = cursor->next;
-                counter++;
-            }
-        }
-    }
+    //         while (cursor != NULL)
+    //         {
+    //             cursor = cursor->next;
+    //             counter++;
+    //         }
+    //     }
+    // }
 
-    return counter;
+    return size_dic;
 }
 
 // Unloads dictionary from memory, returning true if successful else false
@@ -140,28 +142,17 @@ bool unload(void)
 
     return true;
 }
+
 // Hash fuction for generating code
-// int hash(const char *x)
-// {
-//     int xlength = strlen(x);
-//     int sum = 0;
-//     for (int i = 0; i < xlength; i++)
-//     {
-//         sum += x[i];
-//     }
-
-//     return sum % 1800;
-// }
-
 unsigned long hash(const char *str)
-    {
-        unsigned long hash = 5381;
-        int i =0;
-        while ( str[i] != '\0')
-        {
-            hash = ((hash << 5) + hash) + str[i]; /* hash * 33 + c */
-            i++;
-        }
-
-        return hash % M;
+{
+    unsigned long hash = 5381;
+    int i =0;
+    while ( str[i] != '\0')
+    {   
+        hash = ((hash << 5) + hash) + str[i]; /* hash * 33 + c */
+        i++;
     }
+
+    return hash % M;
+}
