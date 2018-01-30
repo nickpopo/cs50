@@ -10,6 +10,7 @@
 #include "dictionary.h"
 #include "my.h"
 
+
 // Undefine any definitions
 #undef calculate
 #undef getrusage

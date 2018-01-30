@@ -9,4 +9,4 @@ typedef struct node
 node;
 
 // Protopypes
-int hash(const char *word);
+unsigned long hash(const char *str);
