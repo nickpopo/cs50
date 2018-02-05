@@ -1,13 +1,8 @@
 from cs50 import get_int
 
-# checking of the number of digits
-while True:
-    # Promt user for credit card number
-    card = get_int("Card number: ")
-    lenghtCard = len(str(card))
-    if lenghtCard == 13 or lenghtCard == 15 or lenghtCard == 16:
-        break
-    print("invalid lenght of number")
+
+# Promt user for credit card number
+card = get_int("Card number: ")
 
 # convert card number to string
 card_str = str(card)
