@@ -3,6 +3,7 @@ from cs50 import get_int
 
 # Promt user for credit card number
 card = get_int("Card number: ")
+lenghtCard = len(str(card))
 
 # convert card number to string
 card_str = str(card)
