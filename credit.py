@@ -13,11 +13,11 @@ while True:
 card_str = str(card)
 
 # check for type of card
-if card_str[0] == "4" and (lenghtCard == 13 or lenghtCard == 16):
+if card_str[0] == "4":
     cardType = "VISA"
-elif card_str[0] == "3" and (card_str[1] == "4" or card_str[1] == "7") and lenghtCard == 15:
+elif card_str[0] == "3" and (card_str[1] == "4" or card_str[1] == "7"):
     cardType = "AMEX"
-elif card_str[0] == "5" and (card_str[1] == "1" or card_str[1] == "2" or card_str[1] == "3" or card_str[1] == "4" or card_str[1] == "5") and lenghtCard == 15:
+elif card_str[0] == "5" and (card_str[1] == "1" or card_str[1] == "2" or card_str[1] == "3" or card_str[1] == "4" or card_str[1] == "5"):
     cardType = "MASTERCARD"
 else:
     cardType = "INVALID"
@@ -38,9 +38,10 @@ if cardType != "INVALID":
     if sum % 10 == 0:
         print(cardType)
     else:
-        print("INVALID")
-else:
-    print("INVALID")
+        print("Checksum is not passed")
+        print(cardType)
+
+
     
     
 
