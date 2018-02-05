@@ -3,10 +3,10 @@ from cs50 import get_int
 
 # Promt user for credit card number
 card = get_int("Card number: ")
-lenghtCard = len(str(card))
 
 # convert card number to string
 card_str = str(card)
+lenghtCard = len(card_str)
 
 # check for type of card
 if card_str[0] == "4":
@@ -35,7 +35,8 @@ if cardType != "INVALID":
         print(cardType)
     else:
         print(cardType)
-
+else:
+    print("INVALID")
 
     
     
