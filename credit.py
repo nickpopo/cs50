@@ -38,7 +38,6 @@ if cardType != "INVALID":
     if sum % 10 == 0:
         print(cardType)
     else:
-        print("Checksum is not passed")
         print(cardType)
 
 
