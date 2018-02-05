@@ -18,6 +18,5 @@ for row in range(height):
         # second tower but mirrow
         else:
             print("#" * (row + 1), end = "")
-            print(" " * (height - row - 1), end = "")
     # print new line
     print()
