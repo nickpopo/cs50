@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <!-- TODO -->
+    <form action="/score" method="post">
+        
+        <div class="form-group">
+            <input type="text" class="form-control" id="string1" placeholder="enter the string 1" name="string1"/>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="string2" placeholder="enter the type string 2" name="string2"/>
+        </div>
+        
+        <div class="form-group">
+             <button type="submit" class="btn btn-primary">Convert</button>
+        </div>
+       
+        
+    </form>
+
+{% endblock %}

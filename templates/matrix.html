@@ -1,0 +1,52 @@
+<!-- TODO -->
+<table class="table table-sm">
+    <thead>
+        <tr>
+            {% for i in range(3 + s2|length) %}
+                {% if i < 3 %}
+                <th></th>
+                {% else %}
+                <th>
+                    {{ s2[i-3] }}
+                </th>
+                {% endif %}
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for i in range(3 + s2|length) %}
+                {% if i < 2 %}
+                <th></th>
+                {% else %}
+                <th>
+                    {{ i-2 }}
+                </th>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for element in matrix %}
+
+            <tr>
+
+                {% if loop.index == 1 %} 
+                <th></th>
+                {% else %}
+                <th>{{ s1[loop.index - 2] }}</th>
+                {% endif %}
+
+                <th>{{ loop.index - 1 }}</th>
+
+                {% for cost, _ in element %}
+
+                    <td>{{ cost }}</td>
+
+                {% endfor %}
+
+            </tr>
+
+        {% endfor %}
+
+    </tbody>
+</table>
