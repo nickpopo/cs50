@@ -1,1 +1,1 @@
-# All problem sests from CS50 2017.
+# All problem sets from CS50 2017.
